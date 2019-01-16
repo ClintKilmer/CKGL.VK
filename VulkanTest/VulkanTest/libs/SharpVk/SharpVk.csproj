@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>FacticiusVir</Authors>
+    <Company />
+    <Version>0.0.0</Version>
+    <Description>C# Bindings for the Vulkan API</Description>
+    <PackageLicenseUrl>https://github.com/FacticiusVir/SharpVk/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/FacticiusVir/SharpVk</PackageProjectUrl>
+    <PackageTags>Vulkan SPIR-V Spirv SharpVK 3D</PackageTags>
+    <Copyright>Copyright 2018 Andrew Armstrong/FacticiusVir</Copyright>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <FileVersion>0.0.0.0</FileVersion>
+    <PackageReleaseNotes />
+    <PackageIconUrl>https://raw.githubusercontent.com/FacticiusVir/SharpVk/master/images/SharpVk.png</PackageIconUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Debug\netstandard2.0\SharpVk.xml</DocumentationFile>
+    <LangVersion>latest</LangVersion>
+    <OutputPath>bin\Debug\netstandard2.0\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Release\netstandard2.0\SharpVk.xml</DocumentationFile>
+    <LangVersion>latest</LangVersion>
+    <OutputPath>bin\Release\netstandard2.0\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.2" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+  </ItemGroup>
+
+</Project>
