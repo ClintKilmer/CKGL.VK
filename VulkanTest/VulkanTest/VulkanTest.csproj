@@ -1465,6 +1465,23 @@
     <Compile Include="libs\SharpVk\Viewport.gen.cs" />
     <Compile Include="libs\SharpVk\VoidFunctionDelegate.gen.cs" />
     <Compile Include="libs\SharpVk\WriteDescriptorSet.gen.cs" />
+    <Compile Include="Math\Colour.cs" />
+    <Compile Include="Math\Extensions.cs" />
+    <Compile Include="Math\Math.cs" />
+    <Compile Include="Math\Matrix.cs" />
+    <Compile Include="Math\Matrix2D.cs" />
+    <Compile Include="Math\Point2.cs" />
+    <Compile Include="Math\Quaternion.cs" />
+    <Compile Include="Math\Random.cs" />
+    <Compile Include="Math\RectangleI.cs" />
+    <Compile Include="Math\Rotation.cs" />
+    <Compile Include="Math\Shear3D.cs" />
+    <Compile Include="Math\Transform2D.cs" />
+    <Compile Include="Math\Transform3D.cs" />
+    <Compile Include="Math\UV.cs" />
+    <Compile Include="Math\Vector2.cs" />
+    <Compile Include="Math\Vector3.cs" />
+    <Compile Include="Math\Vector4.cs" />
     <Compile Include="Output.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1482,13 +1499,13 @@
     <None Include="libs\SDL2-CS\README" />
     <None Include="libs\SDL2-CS\SDL2-CS.dll.config" />
     <None Include="packages.config" />
-    <Content Include="Shaders\frag.spv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Shaders\ReadMe.md" />
     <None Include="Shaders\shader.frag" />
+    <Content Include="Shaders\shader.frag.spv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Shaders\shader.vert" />
-    <Content Include="Shaders\vert.spv">
+    <Content Include="Shaders\shader.vert.spv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
