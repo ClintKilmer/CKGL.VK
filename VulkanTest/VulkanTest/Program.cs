@@ -29,7 +29,7 @@ namespace VulkanTest
 		private Device device;
 		private Queue graphicsQueue;
 		private Queue presentQueue;
-		private Queue transferQueue; // May not need
+		private Queue transferQueue;
 
 		private Swapchain swapChain;
 		private Image[] swapChainImages;
@@ -92,6 +92,9 @@ namespace VulkanTest
 				SDL_WindowFlags.SDL_WINDOW_RESIZABLE
 			);
 			WindowID = SDL_GetWindowID(Window);
+
+			var version = Instance.EnumerateVersion();
+			Output.WriteLine($"Vulkan Version: {version.Major}.{version.Minor}.{version.Patch}"); // Debug
 
 			InitialiseVulkan();
 
