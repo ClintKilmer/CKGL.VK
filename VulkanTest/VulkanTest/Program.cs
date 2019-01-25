@@ -11,6 +11,7 @@ using Version = SharpVk.Version;
 using CKGL;
 using System.Runtime.CompilerServices;
 using Buffer = SharpVk.Buffer;
+using SharpVk.MoltenVk;
 
 namespace VulkanTest
 {
@@ -93,8 +94,8 @@ namespace VulkanTest
 			);
 			WindowID = SDL_GetWindowID(Window);
 
-			var version = Instance.EnumerateVersion();
-			Output.WriteLine($"Vulkan Version: {version.Major}.{version.Minor}.{version.Patch}"); // Debug
+			Version version = Instance.EnumerateVersion();
+			Output.WriteLine($"Vulkan - Version: {version.Major}.{version.Minor}.{version.Patch}"); // Debug
 
 			InitialiseVulkan();
 
@@ -263,16 +264,36 @@ namespace VulkanTest
 			}
 
 			//AddAvailableLayer("VK_LAYER_LUNARG_api_dump");
-			AddAvailableLayer("VK_LAYER_LUNARG_standard_validation");
+			//AddAvailableLayer("VK_LAYER_LUNARG_standard_validation");
+
+			var enabledExtentions = new List<string>();
+			enabledExtentions.Add(KhrExtensions.Surface);
+			if (SDL_GetPlatform() == "Windows")
+			{
+				enabledExtentions.Add(KhrExtensions.Win32Surface);
+			}
+			else if (SDL_GetPlatform() == "Linux")
+			{
+				enabledExtentions.Add(KhrExtensions.XlibSurface);
+				//enabledExtentions.Add(KhrExtensions.WaylandSurface);
+			}
+			else if (SDL_GetPlatform() == "Android")
+			{
+				enabledExtentions.Add(KhrExtensions.AndroidSurface);
+			}
+			else if (SDL_GetPlatform() == "Mac OS X")
+			{
+				enabledExtentions.Add(MvkExtensions.MacosSurface);
+			}
+			else if (SDL_GetPlatform() == "iOS")
+			{
+				enabledExtentions.Add(MvkExtensions.IosSurface);
+			}
+			enabledExtentions.Add(ExtExtensions.DebugReport);
 
 			instance = Instance.Create(
 				enabledLayers.ToArray(),
-				new[]
-				{
-					KhrExtensions.Surface, // "VK_KHR_surface",
-					KhrExtensions.Win32Surface, // "VK_KHR_win32_surface",
-					ExtExtensions.DebugReport, // "VK_EXT_debug_report",
-				},
+				enabledExtentions.ToArray(),
 				applicationInfo: new ApplicationInfo
 				{
 					ApplicationName = "VulkanTest",
@@ -301,13 +322,42 @@ namespace VulkanTest
 				throw new Exception($"Error creating Vulkan surface: {SDL_GetError()}");
 
 			surface = Surface.CreateFromHandle(instance, (ulong)surfaceIntPtr);
+
+			//SDL_SysWMinfo info = new SDL_SysWMinfo();
+			//SDL_GetWindowWMInfo(Window, ref info);
+
+			//if (SDL_GetPlatform() == "Windows")
+			//{
+			//	surface = instance.CreateWin32Surface(Window, info.info.win.window);
+			//}
+			//else if (SDL_GetPlatform() == "Linux")
+			//{
+			//	//surface = instance.CreateXlibSurface(info.info.x11.display, info.info.x11.window);
+			//	surface = instance.CreateWaylandSurface(info.info.wl.display, info.info.wl.surface);
+			//}
+			//else if (SDL_GetPlatform() == "Android")
+			//{
+			//}
+			//else if (SDL_GetPlatform() == "Mac OS X")
+			//{
+			//}
+			//else if (SDL_GetPlatform() == "iOS")
+			//{
+			//}
 		}
 
 		private void PickPhysicalDevice()
 		{
 			var availableDevices = instance.EnumeratePhysicalDevices();
 
+			Output.WriteLine("Vulkan - Physical Devices:");
+			foreach (var device in availableDevices)
+			{
+				Output.WriteLine($"    {device.GetProperties().DeviceID} - {device.GetProperties().DeviceName}, Vk v{device.GetProperties().ApiVersion}, Driver v{device.GetProperties().DriverVersion}, Vendor {device.GetProperties().VendorID}, {device.GetProperties().DeviceType}");
+			}
+
 			physicalDevice = availableDevices.First(IsSuitableDevice);
+			Output.WriteLine($"Vulkan - Selected Physical Device: {physicalDevice.GetProperties().DeviceID} - {physicalDevice.GetProperties().DeviceName}");
 		}
 
 		private void CreateLogicalDevice()

@@ -1496,6 +1496,7 @@
     <None Include="packages.config" />
     <None Include="Shaders\ReadMe.md" />
     <None Include="Shaders\shader.frag" />
+    <Content Include="libs\SharpVk\SharpVk.csproj" />
     <Content Include="Shaders\shader.frag.spv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1509,7 +1510,6 @@
     <Content Include="libs\SDL2-CS\SDL2-CS.Core.csproj" />
     <Content Include="libs\SDL2-CS\SDL2-CS.csproj" />
     <Content Include="libs\SDL2-CS\SDL2-CS.sln" />
-    <Content Include="libs\SharpVk\SharpVk.csproj" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
