@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using CKGL;
 using SharpVk;
 using SharpVk.Khronos;
+using SharpVk.MoltenVk;
 using SharpVk.Multivendor;
 using static SDL2.SDL;
-using Version = SharpVk.Version;
-using CKGL;
-using System.Runtime.CompilerServices;
 using Buffer = SharpVk.Buffer;
-using SharpVk.MoltenVk;
+using Version = SharpVk.Version;
 
 namespace VulkanTest
 {
@@ -264,7 +264,7 @@ namespace VulkanTest
 			}
 
 			//AddAvailableLayer("VK_LAYER_LUNARG_api_dump");
-			//AddAvailableLayer("VK_LAYER_LUNARG_standard_validation");
+			AddAvailableLayer("VK_LAYER_LUNARG_standard_validation");
 
 			var enabledExtentions = new List<string>();
 			enabledExtentions.Add(KhrExtensions.Surface);
@@ -669,10 +669,7 @@ namespace VulkanTest
 							{
 								new PipelineColorBlendAttachmentState
 								{
-									ColorWriteMask = ColorComponentFlags.R
-														| ColorComponentFlags.G
-														| ColorComponentFlags.B
-														| ColorComponentFlags.A,
+									ColorWriteMask = ColorComponentFlags.R | ColorComponentFlags.G | ColorComponentFlags.B | ColorComponentFlags.A,
 									BlendEnable = false,
 									SourceColorBlendFactor = BlendFactor.One,
 									DestinationColorBlendFactor = BlendFactor.Zero,
